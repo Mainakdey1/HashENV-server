@@ -17,9 +17,7 @@ app = FastAPI()
 
 #Root endpoint
 @app.get('/')
-def root(
-    authenticated: bool = Depends(authenticate)
-):
+def root():
     return {
         'message': settings.PROJECT_NAME,
         'version': settings.API_STR,
@@ -28,9 +26,7 @@ def root(
 
     }
 @app.get('/health')
-def health(
-    authenticated: bool=Depends(authenticate)
-):
+def health():
     return {'status': 'ok'}
 
 
