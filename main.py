@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Dict
 from fastapi import Depends
+from fastapi import HTTPException
 
 from src.services.database_query import get_env
 from src.services.data_retrieval_hashenv import env_recieve
@@ -14,6 +15,9 @@ class EnvData(BaseModel):
     repository_name: str
     envs: Dict[str, str]
 app = FastAPI()
+
+class Token(BaseModel):
+    token: str
 
 #Root endpoint
 @app.get('/')
@@ -34,6 +38,15 @@ def health():
 def base():
     return {'message': 'hello world'}
 
+@app.post('/auth')
+def auth(token: Token):
+    print(token.token)
+    if token.token == "super-secret":
+        return {'message': 'recieved right token'}
+    else:
+        raise HTTPException(status_code=401)
+
+    
 @app.post('/env-recieve')
 def env_recieve(data: EnvData
              ):
