@@ -10,6 +10,7 @@ from src.services.data_retrieval_hashenv import env_recieve
 from src.core.config import settings
 from src.services.add_new_env_to_db_service import add_new_env_to_db
 from src.services.authentication.authentication_service import authenticate
+from src.services.check_device_token import check_device_token
 
 class EnvData(BaseModel):
     repository_name: str
@@ -56,7 +57,16 @@ def env_recieve(data: EnvData
     except Exception as e:
         return {'message': f'An error occurred: {str(e)}'}
 
-
+@app.get('/device/isregistered/{device_token_id}')
+def check_device__registration(device_token_id: str):
+    if check_device_token(device_token_id=device_token_id):
+        return {
+            "registered": True,
+        }
+    raise HTTPException(
+        status_code=404,
+        detail="Device token not found"
+    )
 
 @app.get('/env/{repository_name}')
 def get_env_endpoint(repository_name: str):

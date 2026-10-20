@@ -5,7 +5,7 @@
 *$py.class
 
 # Virtual environments
-
+.venv
 venv/
 .env/
 .env.*
