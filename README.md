@@ -1,5 +1,5 @@
 # Hashenv Backend Server
-[![Better Stack Badge](https://uptime.betterstack.com/status-badges/v1/monitor/2mh89.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
+[![Better Stack Badge](https://incidents.betterstack.com/status-badges/v1/monitor/31cue.svg)](https://incidents.betterstack.com/?utm_source=status_badge)
 
 Common server system for multiple services, handles requests and returns output at endpoints. 
 
