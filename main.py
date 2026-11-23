@@ -11,6 +11,8 @@ from src.core.config import settings
 from src.services.add_new_env_to_db_service import add_new_env_to_db
 from src.services.authentication.authentication_service import authenticate
 from src.services.check_device_token import check_device_token
+from src.services.list_all_repo_service import list_all_repositories
+
 
 class EnvData(BaseModel):
     repository_name: str
@@ -67,6 +69,11 @@ def check_device__registration(device_token_id: str):
         status_code=404,
         detail="Device token not found"
     )
+
+@app.get('/getrepo')
+def get_all_repos() -> list:
+    repos = list_all_repositories()
+    return repos
 
 @app.get('/env/{repository_name}')
 def get_env_endpoint(repository_name: str):
