@@ -70,6 +70,10 @@ def check_device__registration(device_token_id: str):
         detail="Device token not found"
     )
 
+@app.get('/database-info')
+def get_db_info() -> bool:
+    return True
+
 @app.get('/getrepo')
 def get_all_repos() -> list:
     repos = list_all_repositories()
